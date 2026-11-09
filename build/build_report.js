@@ -198,12 +198,12 @@ const children = [
   H1("9. Presentation plan"),
   table([
     ["Speaker", "Slides", "Topic"],
-    ["Marlen Kalbayev", "1–4", "Introduction, why Agile, Agile Manifesto, Waterfall vs Agile"],
-    ["Yeldos Bakayev", "5–7", "Scrum, our team roles, Product Backlog"],
-    ["Diyor Khabibullayev", "8–10", "Sprint plan, Kanban board, estimation and Definition of Done"],
-    ["Farkhad Amanbayev", "11–14", "Metrics, hybrid model, risks, next step and questions"],
+    ["Marlen Kalbayev", "1–3", "Introduction, Agile Manifesto, why Agile: Waterfall vs Agile"],
+    ["Yeldos Bakayev", "4–5", "Scrum events and our team roles, Product Backlog"],
+    ["Diyor Khabibullayev", "6–8", "Sprint plan, Kanban board and Definition of Done, metrics"],
+    ["Farkhad Amanbayev", "9–11", "Hybrid model, risks, next step and questions"],
   ], [2600, 1200, 5838]),
-  caption("Table 7. Who presents what (about 10–12 minutes in total)"),
+  caption("Table 7. Who presents what (11 slides, about 10 minutes in total)"),
 
   // ---------- refs ----------
   H1("References"),

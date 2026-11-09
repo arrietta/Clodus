@@ -121,33 +121,13 @@ pres.addSection({ title: "Introduction" });
       color: done ? C.text1 : now ? C.accent1 : C.accent6 });
   });
   txt(s, "We are in Sprint 3 of 6", { x: cx, y: cy + 2 * (sz + gap) + 0.02, w: 2.5, h: 0.3, fontSize: 11, color: C.accent6 });
-  s.addNotes("Speaker: Marlen. Hello, we are the Unveil team. Last time we showed our progress report: a hybrid plan with stage gates and Scrum sprints. Today we explain Agile project management and show how we apply it to Unveil, a dating web service where you meet the person first. The six squares are our six two-week sprints: two are done, the third is running now.");
-}
-
-// ===================== 2. Why Agile =====================
-{
-  const s = content("// 01 · WHY AGILE", "We cannot know in advance if the idea works", "Introduction");
-  const y = 1.55, h = 2.35, w = 2.8, g = 0.2;
-  const items = [
-    ["24-hour reveal", "Will people chat for a whole day before they see a photo? Only real users can tell us.", C.background2, C.text1],
-    ["AI co-pilot", "How good the games and questions are, and the limits of the free AI tier, we learn only by building.", C.background2, C.text1],
-    ["14 wk · 448 h · $0", "Time and budget are fixed. 4 people x 8 hours a week. The only thing that can move is scope.", C.accent1, C.text1],
-  ];
-  items.forEach(([head, body, fill, col], i) => {
-    const x = X + i * (w + g);
-    card(s, x, y, w, h, fill);
-    txt(s, head, { x: x + 0.22, y: y + 0.25, w: w - 0.44, h: 0.5, fontSize: 20, bold: true, color: col });
-    txt(s, body, { x: x + 0.22, y: y + 0.9, w: w - 0.44, h: 1.3, fontSize: 14, color: col });
-  });
-  txt(s, "A new product with fixed time and budget: we fix the dates and let the scope flex. This is what Agile is for.",
-    { x: X, y: 4.2, w: W, h: 0.6, fontSize: 15, bold: true });
-  s.addNotes("Speaker: Marlen. Why do we need Agile at all? Unveil is a new idea. We do not know if users will accept waiting 24 hours to see a photo, and we do not know how good our AI co-pilot will be until we build it. At the same time our time and budget are fixed: 14 weeks, 448 team-hours and zero dollars. When the product is uncertain but time and money are fixed, the safest approach is to deliver small working parts, get feedback early and let the scope change. That is Agile.");
+  s.addNotes("Speaker: Marlen. Hello, we are the Unveil team. Today: Marlen covers Agile basics, Yeldos Scrum and the backlog, Diyor our sprints and board, Farkhad metrics, risks and the next step. Last time we showed our progress report: a hybrid plan with stage gates and Scrum sprints. Today we explain Agile project management and show how we apply it to Unveil, a dating web service where you meet the person first. The six squares are our six two-week sprints: two are done, the third is running now.");
 }
 
 // ===================== 3. Manifesto =====================
 pres.addSection({ title: "Agile theory" });
 {
-  const s = content("// 02 · WHAT IS AGILE", "Four values of the Agile Manifesto", "Agile theory");
+  const s = content("// 01 · WHAT IS AGILE", "Four values of the Agile Manifesto", "Agile theory");
   const vals = [
     ["Individuals and interactions", "over processes and tools", "Us: a weekly stand-up and a team chat instead of long status reports."],
     ["Working software", "over comprehensive documentation", "Us: every sprint ends with a demo that really runs."],
@@ -171,7 +151,7 @@ pres.addSection({ title: "Agile theory" });
 
 // ===================== 4. Waterfall vs Agile =====================
 {
-  const s = content("// 03 · PREDICTIVE VS AGILE", "Waterfall vs Agile on our project", "Agile theory");
+  const s = content("// 02 · WHY AGILE FOR UNVEIL", "Waterfall vs Agile on our project", "Agile theory");
   const hl = (t) => ({ text: t, options: { bold: true } });
   table(s, [
     ["Aspect", "Waterfall: plan, then build", "Agile: build in small steps (Unveil)"],
@@ -182,79 +162,59 @@ pres.addSection({ title: "Agile theory" });
     [hl("Change"), "Formal change request", "PO reorders the backlog; new scope needs sponsor OK"],
     [hl("Progress"), "Earned value: SPI, CPI", "Earned value + velocity and burndown"],
   ], { y: 1.45, colW: [1.6, 3.0, 4.2], rowH: 0.36, fontSize: 13 });
-  txt(s, "With pure Waterfall, the first real test of the 24-hour reveal would be in week 14. Too late to fix anything.",
+  txt(s, "Will users wait 24 hours for a photo? Is a free AI good enough? With Waterfall we learn it in week 14, too late. With Agile, every two weeks.",
     { x: X, y: 4.25, w: W, h: 0.6, fontSize: 15, bold: true });
-  s.addNotes("Speaker: Marlen. Here is the difference between the classic predictive approach, Waterfall, and Agile, using our project. In Waterfall we plan everything at the start, freeze scope and release once at the end. In Agile we keep the big milestones but plan only the next sprint in detail, keep a prioritised backlog and release something that works every two weeks. The key risk for Unveil: in Waterfall nobody would try the 24-hour photo reveal until week 14, when it is too late to change it. Now Yeldos will explain Scrum.");
+  s.addNotes("Speaker: Marlen. Why does Unveil need Agile? It is a new idea: we do not know if users will wait 24 hours to see a photo, or how good a free AI co-pilot will be, while our time and budget are fixed: 14 weeks, 448 team-hours and zero dollars. Here is the difference between the classic predictive approach, Waterfall, and Agile, using our project. In Waterfall we plan everything at the start, freeze scope and release once at the end. In Agile we keep the big milestones but plan only the next sprint in detail, keep a prioritised backlog and release something that works every two weeks. The key risk for Unveil: in Waterfall nobody would try the 24-hour photo reveal until week 14, when it is too late to change it. Now Yeldos will explain Scrum.");
 }
 
-// ===================== 5. Scrum loop =====================
+// ===================== Scrum + team =====================
 pres.addSection({ title: "Scrum and our team" });
 {
-  const s = content("// 04 · SCRUM", "One sprint is a two-week loop", "Scrum and our team");
+  const s = content("// 03 · SCRUM ON OUR TEAM", "A two-week loop and three roles", "Scrum and our team");
   const ev = [
     ["DAY 1", "Sprint Planning", "45 min. Pick the Sprint Goal and the stories."],
-    ["DAILY + WEEKLY", "Stand-up", "Chat update every day; 15-min call once a week."],
+    ["DAILY + WEEKLY", "Stand-up", "Chat update every day, 15-min call weekly."],
     ["DAY 10", "Sprint Review", "30 min. Live demo, feedback from the lecturer."],
     ["DAY 10", "Retrospective", "20 min. One thing we change next sprint."],
   ];
-  const y = 1.5, h = 1.6, w = 1.85, g = 0.47;
+  const y = 1.4, h = 1.35, w = 1.85, g = 0.47;
   ev.forEach(([when, name, body], i) => {
     const x = X + i * (w + g);
-    card(s, x, y, w, h, i === 0 ? C.accent1 : C.background2);
-    txt(s, when, { x: x + 0.15, y: y + 0.15, w: w - 0.3, h: 0.25, fontSize: 10, bold: true, color: i === 0 ? C.text1 : C.text2 });
-    txt(s, name, { x: x + 0.15, y: y + 0.42, w: w - 0.3, h: 0.35, fontSize: 15, bold: true });
-    txt(s, body, { x: x + 0.15, y: y + 0.8, w: w - 0.3, h: 0.75, fontSize: 12 });
+    card(s, x, y, w, h, C.background2);
+    txt(s, when, { x: x + 0.15, y: y + 0.12, w: w - 0.3, h: 0.22, fontSize: 10, bold: true, color: C.text2 });
+    txt(s, name, { x: x + 0.15, y: y + 0.35, w: w - 0.3, h: 0.3, fontSize: 14, bold: true });
+    txt(s, body, { x: x + 0.15, y: y + 0.68, w: w - 0.3, h: 0.62, fontSize: 11 });
     if (i < 3) s.addShape(pres.shapes.RIGHT_ARROW, { x: x + w + 0.1, y: y + h / 2 - 0.12, w: 0.27, h: 0.24, fill: { color: C.text1 }, line: { type: "none" }, objectName: `arrow-${i}` });
   });
-  // roles / artifacts / events
-  const cols = [
-    ["3 roles", "Product Owner, Scrum Master, Developers"],
-    ["5 events", "Sprint, Planning, Daily Scrum, Review, Retrospective"],
-    ["3 artifacts", "Product Backlog, Sprint Backlog, Increment"],
+  const ry = 2.95, rh = 1.8, rw = (W - 0.4) / 3;
+  const roles = [
+    ["PRODUCT OWNER", "Yeldos", "Owns user stories, orders the backlog, talks to the sponsor.", C.accent1],
+    ["SCRUM MASTER", "Marlen", "Runs the events, removes blockers, keeps WBS, CPM and risks.", C.background2],
   ];
-  const w2 = 2.8, g2 = 0.2, y2 = 3.4;
-  cols.forEach(([a, b], i) => {
-    const x = X + i * (w2 + g2);
-    card(s, x, y2, w2, 1.25, C.background1, { line: HEX.line });
-    txt(s, a, { x: x + 0.2, y: y2 + 0.15, w: w2 - 0.4, h: 0.4, fontSize: 18, bold: true });
-    txt(s, b, { x: x + 0.2, y: y2 + 0.58, w: w2 - 0.4, h: 0.6, fontSize: 12, color: C.text2 });
+  roles.forEach(([lab, name, body, fill], i) => {
+    const x = X + i * (rw + 0.2);
+    card(s, x, ry, rw, rh, fill);
+    txt(s, lab, { x: x + 0.2, y: ry + 0.15, w: rw - 0.4, h: 0.22, fontSize: 10, bold: true, color: i === 0 ? C.text1 : C.text2 });
+    txt(s, name, { x: x + 0.2, y: ry + 0.4, w: rw - 0.4, h: 0.4, fontSize: 20, bold: true });
+    txt(s, body, { x: x + 0.2, y: ry + 0.9, w: rw - 0.4, h: 0.8, fontSize: 12 });
   });
-  txt(s, "Source: The Scrum Guide, 2020", { x: X, y: 4.82, w: W, h: 0.25, fontSize: 10, color: C.text2 });
-  s.addNotes("Speaker: Yeldos. The most popular Agile framework is Scrum. Work is split into sprints; ours are two weeks long. Each sprint starts with Sprint Planning where we choose a Sprint Goal. During the sprint we post a short daily update in our chat and have a 15-minute call every week. On the last day we show a live demo in the Sprint Review and then hold a Retrospective to agree one improvement. Scrum has three roles, five events and three artifacts: the Product Backlog, the Sprint Backlog and the Increment, the working result of the sprint.");
-}
-
-// ===================== 6. Team roles =====================
-{
-  const s = content("// 05 · OUR TEAM IN SCRUM", "Four people, three Scrum roles", "Scrum and our team");
-  const y = 1.45, h = 2.75;
-  card(s, X, y, 2.7, h, C.accent1);
-  txt(s, "PRODUCT OWNER", { x: X + 0.2, y: y + 0.2, w: 2.3, h: 0.25, fontSize: 10, bold: true });
-  txt(s, "Yeldos", { x: X + 0.2, y: y + 0.5, w: 2.3, h: 0.45, fontSize: 22, bold: true });
-  txt(s, "Owns requirements and user stories, orders the backlog, talks to the sponsor.", { x: X + 0.2, y: y + 1.05, w: 2.3, h: 1.5, fontSize: 13 });
-
-  const x2 = X + 2.9;
-  card(s, x2, y, 2.7, h, C.background2);
-  txt(s, "SCRUM MASTER", { x: x2 + 0.2, y: y + 0.2, w: 2.3, h: 0.25, fontSize: 10, bold: true, color: C.text2 });
-  txt(s, "Marlen", { x: x2 + 0.2, y: y + 0.5, w: 2.3, h: 0.45, fontSize: 22, bold: true });
-  txt(s, "Runs the events, removes blockers, keeps the WBS, CPM and risk register up to date.", { x: x2 + 0.2, y: y + 1.05, w: 2.3, h: 1.5, fontSize: 13 });
-
-  const x3 = X + 5.8, w3 = W - 5.8;
-  card(s, x3, y, w3, h, C.background1, { line: HEX.ink });
-  txt(s, "DEVELOPERS · ALL FOUR", { x: x3 + 0.2, y: y + 0.2, w: w3 - 0.4, h: 0.25, fontSize: 10, bold: true, color: C.text2 });
+  const dx = X + 2 * (rw + 0.2);
+  card(s, dx, ry, rw, rh, C.background1, { line: HEX.ink });
+  txt(s, "DEVELOPERS · ALL FOUR", { x: dx + 0.2, y: ry + 0.15, w: rw - 0.4, h: 0.22, fontSize: 10, bold: true, color: C.text2 });
   txt(s, [
-    { text: "Diyor", options: { bold: true } }, { text: " · data model, API, matching", options: { breakLine: true } },
-    { text: "Farkhad", options: { bold: true } }, { text: " · sign-up UI, tests, chat", options: { breakLine: true } },
+    { text: "Diyor", options: { bold: true } }, { text: " · API, matching", options: { breakLine: true } },
+    { text: "Farkhad", options: { bold: true } }, { text: " · sign-up, tests, chat", options: { breakLine: true } },
     { text: "Marlen", options: { bold: true } }, { text: " · AI co-pilot", options: { breakLine: true } },
     { text: "Yeldos", options: { bold: true } }, { text: " · privacy, testing" },
-  ], { x: x3 + 0.2, y: y + 0.55, w: w3 - 0.4, h: 2.0, fontSize: 13, paraSpaceAfter: 8 });
-  txt(s, "In a team of four the PO and the Scrum Master also write code. Stakeholder: our lecturer as sponsor; test users give feedback.",
-    { x: X, y: 4.4, w: W, h: 0.5, fontSize: 13, color: C.text2 });
-  s.addNotes("Speaker: Yeldos. This is how the Scrum roles map onto our team. I am the Product Owner because I wrote the requirements and user stories: I decide what we build first and talk to the sponsor, our lecturer. Marlen is the Scrum Master: he already keeps the WBS, the critical path and the risk register, so he runs the events and removes blockers. All four of us are Developers: Diyor does the data model, API and matching algorithm, Farkhad the sign-up, onboarding tests and chat, Marlen the AI co-pilot, and I do privacy settings and testing.");
+  ], { x: dx + 0.2, y: ry + 0.45, w: rw - 0.4, h: 1.3, fontSize: 12, paraSpaceAfter: 4 });
+  txt(s, "Scrum: 3 roles, 5 events, 3 artifacts (Product Backlog, Sprint Backlog, Increment) · Source: The Scrum Guide, 2020",
+    { x: X, y: 4.85, w: W, h: 0.25, fontSize: 10, color: C.text2 });
+  s.addNotes("Speaker: Yeldos. The most popular Agile framework is Scrum. Work is split into sprints; ours are two weeks long. Each sprint starts with Sprint Planning, where we choose a Sprint Goal. During the sprint we post a short daily update in our chat and have a 15-minute call every week. On the last day we show a live demo in the Sprint Review and then hold a Retrospective to agree one improvement. Scrum has three roles. I am the Product Owner, because I wrote the requirements and user stories: I decide what we build first and talk to the sponsor, our lecturer. Marlen is the Scrum Master: he already keeps the WBS, critical path and risk register, so he runs the events and removes blockers. All four of us are Developers: Diyor does the API and matching, Farkhad sign-up, tests and chat, Marlen the AI co-pilot, and I do privacy and testing.");
 }
 
 // ===================== 7. Product backlog =====================
 {
-  const s = content("// 06 · PRODUCT BACKLOG", "The backlog: user stories in MoSCoW order", "Scrum and our team");
+  const s = content("// 04 · PRODUCT BACKLOG", "The backlog: user stories in MoSCoW order", "Scrum and our team");
   const pr = (t) => ({ text: t, options: { bold: true, color: t === "Must" ? C.text1 : C.text2 } });
   table(s, [
     ["#", "As a user, I want to…", "MoSCoW", "SP", "Sprint"],
@@ -268,15 +228,15 @@ pres.addSection({ title: "Scrum and our team" });
     ["8", "Choose who sees my data (privacy settings)", pr("Should"), "5", "S5"],
     ["9", "Get an AI insight report after a week", pr("Could"), "5", "S6"],
   ], { y: 1.4, colW: [0.5, 5.0, 1.2, 0.9, 1.2], rowH: 0.3, fontSize: 12 });
-  txt(s, "Total 60 story points (SP) · Won’t have this term: swipes, mobile app, video calls, payments",
+  txt(s, "60 story points (SP), sized by planning poker (1, 2, 3, 5, 8, 13) · Won’t have this term: swipes, mobile app, video calls, payments",
     { x: X, y: 4.65, w: W, h: 0.3, fontSize: 11, color: C.text2 });
-  s.addNotes("Speaker: Yeldos. The Product Backlog is our ordered to-do list. We took the MoSCoW scope from our charter and rewrote it as user stories: as a user, I want to... Must-have stories come first: sign-up, the onboarding tests, the matching algorithm, the chat and the 24-hour photo reveal. Then the Should and Could items. Each story has an estimate in story points; the whole backlog is 60 points. The Won't list protects us from scope creep. Now Diyor will show how this is split into sprints.");
+  s.addNotes("Speaker: Yeldos. The Product Backlog is our ordered to-do list. We took the MoSCoW scope from our charter and rewrote it as user stories: as a user, I want to... Must-have stories come first: sign-up, the onboarding tests, the matching algorithm, the chat and the 24-hour photo reveal. Then the Should and Could items. Each story has an estimate in story points; we estimate them with planning poker: everyone shows a Fibonacci card at once, and big differences are discussed. The matching algorithm got 13 because it has the most unknowns. The whole backlog is 60 points. The Won't list protects us from scope creep. Now Diyor will show how this is split into sprints.");
 }
 
 // ===================== 8. Sprint plan =====================
 pres.addSection({ title: "Agile in Unveil" });
 {
-  const s = content("// 07 · SPRINT PLAN", "Six sprints inside five stage gates", "Agile in Unveil");
+  const s = content("// 05 · SPRINT PLAN", "Six sprints inside five stage gates", "Agile in Unveil");
   // top band
   const by = 1.4, bh = 0.4;
   card(s, X, by, 1.25, bh, C.background2);
@@ -309,79 +269,46 @@ pres.addSection({ title: "Agile in Unveil" });
   s.addNotes("Speaker: Diyor. Our 14 weeks start with two weeks for the charter, which is Gate 1. After that we run six two-week sprints. Sprints 1 and 2 are done: requirements, user stories, WBS, the data model and API design. Sprint 3 is running now: sign-up, onboarding tests and profiles, 16 story points. Sprint 4 brings the matching, the chat and the 24-hour photo reveal. Sprint 5 is the AI co-pilot, privacy and testing, and Sprint 6 is the insight report, fixes and the final demo. The stage gates from our plan are checked at the Sprint Reviews, so the two models work together.");
 }
 
-// ===================== 9. Kanban =====================
+// ===================== Kanban + DoD =====================
 {
-  const s = content("// 08 · KANBAN", "One board shows all the work", "Agile in Unveil");
+  const s = content("// 06 · KANBAN AND DONE", "One board, one rule for “done”", "Agile in Unveil");
   const cols = [
-    ["TO DO · WK 8–10", C.background1, ["Matching algorithm · Diyor", "Chat + 24-h reveal · Farkhad", "Privacy settings · Yeldos"]],
-    ["IN PROGRESS · WIP 2", C.accent1, ["Sign-up and test UI · Farkhad", "Profiles, test scoring · Diyor", "AI co-pilot prototype · Marlen"]],
-    ["DONE", C.background2, ["Charter and roles · Marlen", "User stories · Yeldos", "Data model, API · Diyor"]],
+    ["TO DO", C.background1, ["Matching · Diyor", "Chat + reveal · Farkhad", "Privacy · Yeldos"]],
+    ["IN PROGRESS", C.accent1, ["Sign-up, test UI · Farkhad", "Profiles, scoring · Diyor", "AI co-pilot · Marlen"]],
+    ["DONE", C.background2, ["Charter · Marlen", "User stories · Yeldos", "Data model, API · Diyor"]],
   ];
-  const y = 1.4, h = 2.4, g = 0.2, w = (W - 2 * g) / 3;
+  const BW = 5.6, y = 1.4, h = 2.45, g = 0.15, w = (BW - 2 * g) / 3;
   cols.forEach(([head, fill, items], i) => {
     const x = X + i * (w + g);
     card(s, x, y, w, h, fill, fill === C.background1 ? { line: HEX.line } : {});
-    txt(s, head, { x: x + 0.18, y: y + 0.15, w: w - 0.36, h: 0.25, fontSize: 10, bold: true });
+    txt(s, head, { x: x + 0.12, y: y + 0.14, w: w - 0.24, h: 0.22, fontSize: 10, bold: true });
     items.forEach((it, j) => {
-      const iy = y + 0.5 + j * 0.6;
-      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.15, y: iy, w: w - 0.3, h: 0.5, rectRadius: 0.05, fill: { color: C.background1 }, line: { color: HEX.line, width: 0.75 }, objectName: `ticket-${i}-${j}` });
-      txt(s, it, { x: x + 0.25, y: iy, w: w - 0.5, h: 0.5, fontSize: 12, valign: "middle" });
+      const iy = y + 0.48 + j * 0.64;
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.1, y: iy, w: w - 0.2, h: 0.54, rectRadius: 0.05, fill: { color: C.background1 }, line: { color: HEX.line, width: 0.75 }, objectName: `ticket-${i}-${j}` });
+      txt(s, it, { x: x + 0.18, y: iy, w: w - 0.36, h: 0.54, fontSize: 11, valign: "middle" });
     });
   });
-  const rules = [
-    ["WIP limit 2", "No one holds more than 2 cards. Finish before you start."],
-    ["Pull, don’t push", "Take the next card from the top of To do."],
-    ["Done = reviewed", "A card moves only after code review of its pull request."],
-  ];
-  const rw = (W - 2 * g) / 3;
-  rules.forEach(([a, b], i) => {
-    const x = X + i * (rw + g);
-    txt(s, [{ text: a, options: { bold: true, breakLine: true } }, { text: b, options: { color: C.text2 } }],
-      { x, y: 3.98, w: rw, h: 0.9, fontSize: 12 });
-  });
-  s.addNotes("Speaker: Diyor. Inside each sprint we use a Kanban board. It shows all the work in three columns: to do, in progress and done. This is our board at week 7. We have three simple rules: a work-in-progress limit of two cards per person, so we finish things before starting new ones; we pull the next card from the top of the list; and a card is done only after code review of its pull request. Scrum gives us the rhythm, Kanban makes the flow visible.");
-}
+  txt(s, [
+    { text: "WIP limit 2", options: { bold: true } }, { text: " per person: finish before you start. ", options: {} },
+    { text: "Pull", options: { bold: true } }, { text: " the next card from the top of To do. Board at week 7." },
+  ], { x: X, y: 4.05, w: BW, h: 0.7, fontSize: 12 });
 
-// ===================== 10. Estimation & DoD =====================
-{
-  const s = content("// 09 · ESTIMATION AND DONE", "How we size work and when it counts as done", "Agile in Unveil");
-  // left: planning poker
-  const lw = 4.1, y = 1.45;
-  card(s, X, y, lw, 3.3, C.background2);
-  txt(s, "Planning poker", { x: X + 0.2, y: y + 0.18, w: lw - 0.4, h: 0.4, fontSize: 18, bold: true });
-  const fib = ["1", "2", "3", "5", "8", "13"];
-  fib.forEach((f, i) => {
-    const cx = X + 0.2 + i * 0.62;
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: cx, y: y + 0.7, w: 0.5, h: 0.7, rectRadius: 0.06, fill: { color: f === "13" ? C.accent1 : C.background1 }, line: { color: HEX.ink, width: 1 }, objectName: `poker-${f}` });
-    txt(s, f, { x: cx, y: y + 0.7, w: 0.5, h: 0.7, fontSize: 16, bold: true, align: "center", valign: "middle" });
-  });
-  txt(s, "Everyone shows a card at once; big gaps are discussed. Matching got 13 points: it has the most unknowns. Story points measure effort and risk, not hours.",
-    { x: X + 0.2, y: y + 1.6, w: lw - 0.4, h: 1.5, fontSize: 13 });
-
-  // right: DoD
-  const rx = X + lw + 0.3, rw = W - lw - 0.3;
-  card(s, rx, y, rw, 3.3, C.background1, { line: HEX.ink });
-  txt(s, "Definition of Done", { x: rx + 0.2, y: y + 0.18, w: rw - 0.4, h: 0.4, fontSize: 18, bold: true });
-  const dod = [
-    "Code reviewed and merged via pull request",
-    "Meets the story’s acceptance criteria",
-    "Tested on test accounts only, no real photos",
-    "Runs in the demo build",
-    "Hours logged against the task (for EVM)",
-    "Board and backlog updated",
-  ];
+  const rx = X + BW + 0.25, rw = W - BW - 0.25, rh = 3.35;
+  card(s, rx, y, rw, rh, C.background1, { line: HEX.ink });
+  txt(s, "Definition of Done", { x: rx + 0.2, y: y + 0.15, w: rw - 0.4, h: 0.35, fontSize: 16, bold: true });
+  const dod = ["Reviewed, merged by PR", "Meets acceptance criteria", "Test accounts only", "Runs in the demo build", "Hours logged (for EVM)", "Board and backlog updated"];
   dod.forEach((d, i) => {
-    const iy = y + 0.72 + i * 0.42;
-    s.addShape(pres.shapes.OVAL, { x: rx + 0.2, y: iy + 0.05, w: 0.24, h: 0.24, fill: { color: C.accent1 }, line: { type: "none" }, objectName: `dod-dot-${i}` });
-    txt(s, "✓", { x: rx + 0.2, y: iy + 0.05, w: 0.24, h: 0.24, fontSize: 10, bold: true, align: "center", valign: "middle" });
-    txt(s, d, { x: rx + 0.55, y: iy, w: rw - 0.75, h: 0.34, fontSize: 13, valign: "middle" });
+    const iy = y + 0.65 + i * 0.44;
+    s.addShape(pres.shapes.OVAL, { x: rx + 0.2, y: iy + 0.06, w: 0.24, h: 0.24, fill: { color: C.accent1 }, line: { type: "none" }, objectName: `dod-dot-${i}` });
+    txt(s, "✓", { x: rx + 0.2, y: iy + 0.06, w: 0.24, h: 0.24, fontSize: 10, bold: true, align: "center", valign: "middle" });
+    txt(s, d, { x: rx + 0.55, y: iy, w: rw - 0.7, h: 0.36, fontSize: 12, valign: "middle" });
   });
-  s.addNotes("Speaker: Diyor. To estimate the backlog we use planning poker with Fibonacci numbers. Everyone shows a card at the same time, and if the numbers are far apart we discuss why. For example the matching algorithm got 13 points because it has the most unknowns. On the right is our Definition of Done: a story counts as done only when the code is reviewed and merged, it meets the acceptance criteria, it is tested on test accounts only, it runs in the demo build, the hours are logged and the board is updated.");
+  s.addNotes("Speaker: Diyor. Inside each sprint we use a Kanban board with three columns: to do, in progress and done. This is our board at week 7. Two rules keep the flow: a work-in-progress limit of two cards per person, so we finish things before starting new ones, and we pull the next card from the top of the list. A card moves to Done only when it meets our Definition of Done: the code is reviewed and merged through a pull request, it meets the acceptance criteria, it is tested on test accounts only, it runs in the demo build, the hours are logged for earned value, and the board is updated.");
 }
 
 // ===================== 11. Metrics =====================
 {
-  const s = content("// 10 · METRICS", "What we track every sprint", "Agile in Unveil");
+  const s = content("// 07 · METRICS", "What we track every sprint", "Agile in Unveil");
   s.addChart(pres.charts.BAR, [{ name: "Story points", labels: ["S3", "S4", "S5", "S6"], values: [16, 26, 13, 5] }], {
     x: X, y: 1.35, w: 4.6, h: 3.1, barDir: "col",
     chartColors: [HEX.yellow], barGapWidthPct: 60,
@@ -405,13 +332,13 @@ pres.addSection({ title: "Agile in Unveil" });
   });
   txt(s, "Sprint 4 holds 26 of 60 points. Fix: Marlen and Yeldos move from tasks with float (H, J) to help.",
     { x: X, y: 4.6, w: W, h: 0.4, fontSize: 12, bold: true });
-  s.addNotes("Speaker: Farkhad. What do we measure? The chart shows the story points planned for each of the remaining sprints. Velocity, the points we finish per sprint, and a burndown chart of the remaining points show if we are on track. We keep earned value too: at week 7 we used 224 of 448 team-hours, and both SPI and CPI are 1.00. Our alarm rule: if a sprint finishes under 90 percent of its planned points, the Product Owner cuts a Could or Should item. The chart shows a real problem: Sprint 4 holds 26 of 60 points and it is on the critical path. So Marlen and Yeldos will move from tasks that have float to help with matching and chat.");
+  s.addNotes("Speaker: Diyor. What do we measure? The chart shows the story points planned for each of the remaining sprints. Velocity, the points we finish per sprint, and a burndown chart of the remaining points show if we are on track. We keep earned value too: at week 7 we used 224 of 448 team-hours, and both SPI and CPI are 1.00. Our alarm rule: if a sprint finishes under 90 percent of its planned points, the Product Owner cuts a Could or Should item. The chart shows a real problem: Sprint 4 holds 26 of 60 points and it is on the critical path. So Marlen and Yeldos will move from tasks that have float to help with matching and chat.");
 }
 
 // ===================== 12. Hybrid =====================
 pres.addSection({ title: "Conclusion" });
 {
-  const s = content("// 11 · HYBRID MODEL", "Keep the gates, run sprints inside them", "Conclusion");
+  const s = content("// 08 · HYBRID MODEL", "Keep the gates, run sprints inside them", "Conclusion");
   const hl = (t) => ({ text: t, options: { bold: true } });
   table(s, [
     ["Plan-driven tool we keep", "Agile partner we add"],
@@ -429,7 +356,7 @@ pres.addSection({ title: "Conclusion" });
 
 // ===================== 13. Risks =====================
 {
-  const s = content("// 12 · RISKS", "Agile has costs too, each with a fix", "Conclusion");
+  const s = content("// 09 · RISKS", "Agile has costs too, each with a fix", "Conclusion");
   const hl = (t) => ({ text: t, options: { bold: true } });
   table(s, [
     ["Risk (score from register)", "Our Agile response"],
@@ -447,7 +374,7 @@ pres.addSection({ title: "Conclusion" });
 // ===================== 14. Next step =====================
 {
   const s = pres.addSlide({ masterName: "Yellow", sectionTitle: "Conclusion" });
-  s.addText("// 13 · NEXT STEP", { placeholder: "kicker" });
+  s.addText("// 10 · NEXT STEP", { placeholder: "kicker" });
   s.addText("Sprint 4: the heart of Unveil", { placeholder: "title" });
   const items = [
     ["WEEK 9 · PLANNING", "Goal: two test users get matched, chat, and see the photo after 24 hours"],
